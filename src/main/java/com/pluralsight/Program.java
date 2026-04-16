@@ -29,16 +29,19 @@ public class Program {
                     Enter your command:""");
 
             int command = input.nextInt();
+            input.nextLine();
 
             switch (command) {
                 case 1:
                     listAllVehicles();
                     break;
-                case 2: //findVehiclesByPrice();
+                case 2:
+                    findVehiclesByModel();
                     break;
                 case 5: //addAVehicle();
                     break;
                 case 6:
+                    programIsRunning = false;
                     break;
             }
         }
@@ -51,6 +54,25 @@ public class Program {
 
             System.out.println(oneVehicle.getVehicleId()+ ", " + oneVehicle.getMakeModel() + ", " + oneVehicle.getColor()
                                 + ", " + oneVehicle.getOdometerReading() + ", " + oneVehicle.getPrice());
+        }
+        System.out.println();
+    }
+
+    private static void findVehiclesByModel(){
+        System.out.println("---Search by make/model--- ");
+        System.out.println("Enter model name: ");
+        String inputModel = input.nextLine();
+        boolean foundVehicle = false;
+
+        for (Vehicle eachVehicle : vehicles){
+            if (inputModel.equals(eachVehicle.getMakeModel())){
+                System.out.println("We found option that match you model request: " + eachVehicle.getVehicleId()+ ", " + eachVehicle.getMakeModel() + ", " + eachVehicle.getColor()
+                        + ", " + eachVehicle.getOdometerReading() + ", " + eachVehicle.getPrice());
+                foundVehicle = true;
+            }
+        }
+        if(!foundVehicle){
+            System.out.println("We do not have this model available!");
         }
         System.out.println();
     }
