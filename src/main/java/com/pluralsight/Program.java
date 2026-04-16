@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Program {
     static Scanner input = new Scanner(System.in);
-    static Vehicle[] vehicles = new Vehicle[6];
+    static Vehicle[] vehicles = new Vehicle[20];
 
     public static void main(String[] args) {
 
@@ -38,7 +38,10 @@ public class Program {
                 case 2:
                     findVehiclesByModel();
                     break;
-                case 5: //addAVehicle();
+                case 3:
+                    searchPriceRange();
+                case 5:
+                    //addAVehicle();
                     break;
                 case 6:
                     programIsRunning = false;
@@ -51,9 +54,10 @@ public class Program {
     private static void listAllVehicles(){
         System.out.println("---List of All Vehicles ---");
         for(Vehicle oneVehicle : vehicles) {
-
-            System.out.println(oneVehicle.getVehicleId()+ ", " + oneVehicle.getMakeModel() + ", " + oneVehicle.getColor()
-                                + ", " + oneVehicle.getOdometerReading() + ", " + oneVehicle.getPrice());
+            if(oneVehicle!= null) {
+                System.out.println(oneVehicle.getVehicleId() + ", " + oneVehicle.getMakeModel() + ", " + oneVehicle.getColor()
+                        + ", " + oneVehicle.getOdometerReading() + ", " + oneVehicle.getPrice());
+            }
         }
         System.out.println();
     }
@@ -76,6 +80,30 @@ public class Program {
         }
         System.out.println();
     }
+
+    private static void searchPriceRange(){
+        System.out.println("---List Vehicle withing Price Range---");
+        System.out.println("Enter min price: ");
+        float inputMinPrice = input.nextFloat();
+
+        System.out.println("Enter max price: ");
+        float inputMaxPrice = input.nextFloat();
+
+        boolean found = false;
+
+        for (Vehicle eachVehicle : vehicles){
+            if(eachVehicle.getPrice() >= inputMinPrice && eachVehicle.getPrice() <= inputMaxPrice){
+
+                System.out.println("We found option that match you model request: " + eachVehicle.getVehicleId()+ ", " + eachVehicle.getMakeModel() + ", " + eachVehicle.getColor()
+                        + ", " + eachVehicle.getOdometerReading() + ", " + eachVehicle.getPrice());
+                found = true;
+            }
+        }
+        if (!found){
+            System.out.println("No car withing your range!");
+        }
+    }
+
 
 
 }
